@@ -32,6 +32,27 @@
       <scope>system</scope>
       <systemPath>${basedir}/libs/padl.jar</systemPath>
     </dependency>
+    <dependency>
+      <groupId>padl-analyses</groupId>
+      <artifactId>padl-analyses</artifactId>
+      <version>5.8</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/padl-analyses-5.8.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>padl-statements-creator-classfile</groupId>
+      <artifactId>padl-statements-creator-classfile</artifactId>
+      <version>5.7.5</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/padl-statements-creator-classfile-5.7.5.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>padl-creator-classfile</groupId>
+      <artifactId>padl-creator-classfile</artifactId>
+      <version>5.7.5</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/padl-creator-classfile-5.7.5.jar</systemPath>
+    </dependency>
   </dependencies>
 
   <build>
