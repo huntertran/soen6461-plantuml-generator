@@ -18,7 +18,7 @@ public class MetaModelCreator {
         return UniqueMetaModelCreatorHolder.UNIQUE_META_MODEL_CREATOR;
     }
 
-    public static ICodeLevelModel createMetaModelsFromJar(final String aBinPath) {
+    public static ICodeLevelModel createMetaModelsFromCompiledClasses(final String aBinPath) {
         ICodeLevelModel codeLevelModel = Factory.getInstance().createCodeLevelModel("");
         final ModelStatistics statisticModelListener = new ModelStatistics();
         codeLevelModel.addModelListener(statisticModelListener);
