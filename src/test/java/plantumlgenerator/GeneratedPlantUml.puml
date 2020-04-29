@@ -1,0 +1,83 @@
+@startuml test
+
+hide empty members
+skinparam linetype ortho
+
+package java {
+    package io {
+        class Serializable {
+
+        }
+    }
+    package lang {
+        class Object {
+
+        }
+    }
+}
+package padl {
+    package event {
+
+        class AnalysisEvent {
+
+        }
+
+        class ElementEvent {
+
+        }
+
+        class EntityEvent {
+
+        }
+
+        class EventGenerator {
+
+        }
+
+        interface IEvent {
+
+        }
+
+        interface IModelListener {
+
+        }
+
+        interface IMotifModelListener {
+
+        }
+
+        class IdentificationEvent {
+
+        }
+
+        class InvokeEvent {
+
+        }
+    }
+    package visitor {
+        class IWalker {
+
+        }
+    }
+}
+
+
+AnalysisEvent ..^ IEvent
+
+ElementEvent ..^ IEvent
+
+EntityEvent ..^ IEvent
+
+EventGenerator ..^ IWalker
+
+EventGenerator ..^ Serializable
+
+
+IModelListener ^-- IMotifModelListener
+
+
+IdentificationEvent ..^ IEvent
+
+InvokeEvent ..^ IEvent
+
+@enduml
