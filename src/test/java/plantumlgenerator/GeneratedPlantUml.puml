@@ -73,7 +73,7 @@ EventGenerator ..^ IWalker
 EventGenerator ..^ Serializable
 
 
-IMotifModelListener ^-- IModelListener
+IMotifModelListener --^ IModelListener
 
 
 IdentificationEvent ..^ IEvent
