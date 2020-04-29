@@ -39,12 +39,12 @@ abstract class PlantUmlWalker {
 
     public void close(IAbstractModel arg0) {
         StringUtils.addNewLine(buffer);
-        
+
         this.buffer.append(this.relationships.toString());
-        
+
         StringUtils.addNewLine(buffer);
         StringUtils.addNewLine(buffer);
-        
+
         this.buffer.append("@enduml");
     }
 
@@ -144,7 +144,7 @@ abstract class PlantUmlWalker {
         StringUtils.addNewLine(buffer);
         StringUtils.addNewLine(buffer);
         this.buffer.append("hide empty members");
-        StringUtils.addNewLine(buffer);        
+        StringUtils.addNewLine(buffer);
         this.buffer.append("skinparam linetype ortho");
         StringUtils.addNewLine(buffer);
     }
@@ -160,23 +160,25 @@ abstract class PlantUmlWalker {
         StringUtils.addTabs(this.indent, this.buffer);
         this.buffer.append("class " + className + " {");
         StringUtils.addNewLine(buffer);
+        
+        int test = arg0.getNumberOfConstituents();
 
         StringUtils.addNewLine(relationships);
 
         Iterator<?> iterator = arg0.getIteratorOnInheritedEntities();
         if (iterator.hasNext()) {
             while (iterator.hasNext()) {
-                
+
                 IFirstClassEntity entity = (IFirstClassEntity) iterator.next();
-                
-                if(entity instanceof Object) {
+
+                if (entity instanceof Object) {
                     continue;
                 }
-                
+
                 StringUtils.addNewLine(relationships);
                 this.relationships.append(className);
                 // extends relationship
-                
+
                 this.relationships.append(" --^ ");
                 this.relationships.append(entity.getName());
                 if (iterator.hasNext()) {
@@ -231,7 +233,7 @@ abstract class PlantUmlWalker {
     public void open(IInterface arg0) {
         System.out.print("Open ");
         System.out.println(arg0);
-        
+
         String interfaceName = String.valueOf(arg0.getName());
 
         StringUtils.addNewLine(buffer);
@@ -240,23 +242,28 @@ abstract class PlantUmlWalker {
         this.buffer.append("interface " + interfaceName + " {");
         StringUtils.addNewLine(buffer);
 
-        StringUtils.addNewLine(relationships);
-
-        Iterator<?> iterator = arg0.getIteratorOnInheritingEntities();
+        Iterator<?> iterator = arg0.getIteratorOnConstituents();
         if (iterator.hasNext()) {
             while (iterator.hasNext()) {
-                
+                IConstituent constituent = (IConstituent) iterator.next();
+                System.out.println(constituent);
+            }
+
+        }
+
+        StringUtils.addNewLine(relationships);
+
+        iterator = arg0.getIteratorOnInheritingEntities();
+        if (iterator.hasNext()) {
+            while (iterator.hasNext()) {
+
                 IFirstClassEntity entity = (IFirstClassEntity) iterator.next();
-                
-//                if(entity instanceof Object) {
-//                    continue;
-//                }
-                
+
                 StringUtils.addNewLine(relationships);
-                this.relationships.append(interfaceName);
-                // extends relationship                
-                this.relationships.append(" ^-- ");
                 this.relationships.append(entity.getName());
+                // extends relationship
+                this.relationships.append(" --^ ");
+                this.relationships.append(interfaceName);
                 if (iterator.hasNext()) {
                     StringUtils.addNewLine(relationships);
                 }
@@ -267,7 +274,6 @@ abstract class PlantUmlWalker {
     public void open(IMemberClass arg0) {
         System.out.print("Open ");
         System.out.println(arg0);
-
     }
 
     public void open(IMemberGhost arg0) {
@@ -279,7 +285,6 @@ abstract class PlantUmlWalker {
     public void open(IMemberInterface arg0) {
         System.out.print("Open ");
         System.out.println(arg0);
-
     }
 
     public void open(IMethod arg0) {
