@@ -31,7 +31,7 @@
 			<attribute name="m2e-apt" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/padl.jar"/>
+	<classpathentry kind="lib" path="libs/padl.jar" sourcepath="D:/Study/Courses/SOEN6461/padl"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PADL Creator ClassFile"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PADL Statements Creator ClassFile"/>
 	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
