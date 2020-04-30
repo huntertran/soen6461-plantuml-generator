@@ -49,71 +49,45 @@ abstract class PlantUmlVisitor {
     }
 
     public void close(IClass arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
         StringUtils.addNewLine(buffer);
         StringUtils.addTabs(this.indent, buffer);
         this.buffer.append("}");
     }
 
     public void close(IConstructor arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
-
     }
 
     public void close(IDelegatingMethod arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
-
     }
 
     public void close(IGetter arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
-
     }
 
     public void close(IGhost arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
         StringUtils.addNewLine(buffer);
         StringUtils.addTabs(this.indent, buffer);
         this.buffer.append("}");
     }
 
     public void close(IInterface arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
         StringUtils.addNewLine(buffer);
         StringUtils.addTabs(this.indent, buffer);
         this.buffer.append("}");
     }
 
     public void close(IMemberClass arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
     }
 
     public void close(IMemberGhost arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
     }
 
     public void close(IMemberInterface arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
     }
 
     public void close(IMethod arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
     }
 
     public void close(IPackage arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
-
         StringUtils.addNewLine(buffer);
         this.indent--;
         StringUtils.addTabs(this.indent, buffer);
@@ -121,9 +95,6 @@ abstract class PlantUmlVisitor {
     }
 
     public void close(IPackageDefault arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
-
         StringUtils.addNewLine(buffer);
         this.indent--;
         StringUtils.addTabs(this.indent, buffer);
@@ -131,8 +102,6 @@ abstract class PlantUmlVisitor {
     }
 
     public void close(ISetter arg0) {
-        System.out.print("Close ");
-        System.out.println(arg0);
     }
 
     public String getName() {
@@ -150,9 +119,6 @@ abstract class PlantUmlVisitor {
     }
 
     public void open(IClass arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
-
         String className = String.valueOf(arg0.getName());
 
         StringUtils.addNewLine(buffer);
@@ -165,8 +131,6 @@ abstract class PlantUmlVisitor {
 
         this.buffer.append("class " + className + " {");
         StringUtils.addNewLine(buffer);
-
-        int test = arg0.getNumberOfConstituents();
 
         StringUtils.addNewLine(relationships);
 
@@ -208,27 +172,15 @@ abstract class PlantUmlVisitor {
     }
 
     public void open(IConstructor arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
-
     }
 
     public void open(IDelegatingMethod arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
-
     }
 
     public void open(IGetter arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
-
     }
 
     public void open(IGhost arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
-
         StringUtils.addNewLine(buffer);
         StringUtils.addTabs(this.indent, this.buffer);
         this.buffer.append("class " + String.valueOf(arg0.getName()) + " {");
@@ -236,9 +188,6 @@ abstract class PlantUmlVisitor {
     }
 
     public void open(IInterface arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
-
         String interfaceName = String.valueOf(arg0.getName());
 
         StringUtils.addNewLine(buffer);
@@ -277,31 +226,19 @@ abstract class PlantUmlVisitor {
     }
 
     public void open(IMemberClass arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
     }
 
     public void open(IMemberGhost arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
 
     }
 
     public void open(IMemberInterface arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
     }
 
     public void open(IMethod arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
-
     }
 
     public void open(IPackage arg0) {
-        System.out.print("package Open ");
-        System.out.println(arg0);
-
         StringUtils.addNewLine(buffer);
         StringUtils.addTabs(this.indent, buffer);
         this.buffer.append("package " + String.valueOf(arg0.getName()) + " {");
@@ -309,9 +246,6 @@ abstract class PlantUmlVisitor {
     }
 
     public void open(IPackageDefault arg0) {
-        System.out.print("package default Open ");
-        System.out.println(arg0);
-
         StringUtils.addNewLine(buffer);
         StringUtils.addTabs(this.indent, buffer);
         this.buffer.append("package " + String.valueOf(arg0.getName()) + " {");
@@ -320,9 +254,6 @@ abstract class PlantUmlVisitor {
     }
 
     public void open(ISetter arg0) {
-        System.out.print("Open ");
-        System.out.println(arg0);
-
     }
 
     public void reset() {
@@ -332,73 +263,39 @@ abstract class PlantUmlVisitor {
     }
 
     public void unknownConstituentHandler(String arg0, IConstituent arg1) {
-        // TODO Auto-generated method stub
 
     }
 
     public void visit(IAggregation arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(IAssociation arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(IComposition arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(IContainerAggregation arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(IContainerComposition arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(ICreation arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(IField arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(IMethodInvocation arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(IParameter arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(IPrimitiveEntity arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 
     public void visit(IUseRelationship arg0) {
-        System.out.print("Visit ");
-        System.out.println(arg0);
-
     }
 }
