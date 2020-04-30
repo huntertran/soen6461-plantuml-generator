@@ -1,0 +1,131 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{rotating}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{url}
+\usepackage{hyperref}
+
+\usepackage{minted}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
+\urlstyle{same}
+\definecolor{darkgray}{rgb}{0.66, 0.66, 0.66}
+	\definecolor{blue(ryb)}{rgb}{0.01, 0.28, 1.0}
+\definecolor{dimgray}{rgb}{0.41, 0.41, 0.41}
+\sectionfont{\color{cyan}} 
+% \subsectionfont{\color{blue}}
+
+
+
+\renewcommand{\texttt}[1]{%
+  \begingroup
+  \ttfamily
+  \begingroup\lccode`~=`/\lowercase{\endgroup\def~}{/\discretionary{}{}{}}%
+  \begingroup\lccode`~=`[\lowercase{\endgroup\def~}{[\discretionary{}{}{}}%
+  \begingroup\lccode`~=`.\lowercase{\endgroup\def~}{.\discretionary{}{}{}}%
+  \catcode`/=\active\catcode`[=\active\catcode`.=\active
+  \scantokens{#1\noexpand}%
+  \endgroup
+}
+
+\title{SOEN6461 - Software Design Methodology\\
+Design Project\\
+Group 9 - Deliverable 3\\
+\bigskip
+\large{\centerline{\textbf{Professor Yann-Gaël Guéhéneuc}}}
+}
+
+\begin{document}
+
+\date{}
+\maketitle
+
+
+
+% \bigskip
+% \bigskip
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Student ID} & \textbf{Unique email}               \\ \hline
+40124288   & plablisenter@outlook.com   \\ \hline
+40089008   & user.40089008@gmail.com    \\ \hline
+40091878   & SOEN6461cheraghi@gmail.com \\ \hline
+40130791   & komal3194p@gmail.com       \\ \hline
+\end{tabular}
+\end{table}
+
+% \vspace{25em}
+
+% \centerline{Department of Computer Science and Software Engineering}
+
+% \centerline{Gina Cody School of Engineering and Computer Science}
+
+% \centerline{Concordia University}
+
+% \clearpage
+
+\section{Analysis and Design Requirements}
+
+On the one hand, the PADL meta-model allows describing models of (object-oriented) programs.
+
+On the other hand, “PlantUML is a component that allows to quickly write : […] class diagrams” (See \url{https://plantuml.com/}).
+
+Analyze, design, and implement a Visitor that generates a textual description of any PADL model. The description should include \texttt{padl.kernel.IFirstClassEntity} (and possibly all \texttt{padl.kernel.IEntity}) as nodes. The arcs between nodes should describes the different relations between entities (see \texttt{padl.kernel.IRelationship} and its sub-interfaces). The description should conform to the syntax and semantics of \url{https://plantuml.com/classdiagram} so that PlantUML can be called on this description. Demonstrate your implementation by providing textual description of some PADL model as well as the corresponding PlantUML-generated class diagrams.
+
+\section{Implementation}
+
+\subsection{Create PADL model}
+
+The PADL library contains an interface called \texttt{padl.kernel.ICodeLevelModel}. The implementation class of this interface capable of holding the whole PADL meta-model of a set of related classes.
+
+To populate the meta-models, we use the \texttt{create(final ICodeLevelModelCreator aCodeLevelModelCreator)} method, with combination with the \texttt{padl.creator.classfile.CompleteClassFileCreator} class. The source code for creating meta-model is already provided by professor Yann-Gaël Guéhéneuc. We put it inside a singleton class \texttt{plantumlgenerator.utils.MetaModelCreator}. Since the provided source code is just a code snippet, many libraries are required to make it run.
+
+\subsection{Compile libraries}
+
+Here is the list of libraries that missing/required
+\begin{itemize}
+    \item package \texttt{padl.kernel} for various interfaces and classes of meta-model.
+    \item package \texttt{padl.analysis} for \texttt{UnsupportedSourceModelException}
+    \item package \texttt{padl.creator.classfile} for class \texttt{CompleteClassFileCreator}.
+    \item package \texttt{padl.statement.creator.classfiles} for using the class \texttt{ConditionalModelAnnotator} and \texttt{LOCModelAnnotator}
+    \item package \texttt{padl.util} for using the class \texttt{ModelStatistics}
+\end{itemize}
+
+Each of these package have an corresponding project in \url{https://github.com/ptidejteam/v5.2} repository. Each project also have some dependencies on other libraries as well. To allow separation of each project, we convert each corresponding project into a Maven project and use Maven package command (\texttt{mvn package}) to create jar files.
+
+Finally, we all all the jar files to \texttt{libs} folder of the main project, then add the dependency in Maven's \texttt{pom.xml} file with \texttt{<scope>} attribute set to \texttt{system}.
+
+The dependency in \texttt{pom.xml} file should look like this and repeated with appropriate for every required libraries:
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{xml}
+    <dependency>
+      <groupId>padl-lib</groupId>
+      <artifactId>padl-lib</artifactId>
+      <version>5.2</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/padl.jar</systemPath>
+    </dependency>
+\end{minted}
+
+\end{document}
