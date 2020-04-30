@@ -18,7 +18,12 @@ public class MetaModelCreator {
         return UniqueMetaModelCreatorHolder.UNIQUE_META_MODEL_CREATOR;
     }
 
-    public static ICodeLevelModel createMetaModelsFromCompiledClasses(final String aBinPath) {
+    /**
+     * Create ICodeLevelModel object from a set of compiled java classes (.class files)
+     * @param aBinPath path to the folder of the compiled java classes (.class files)
+     * @return an instance of ICodeLevelModel
+     */
+    public ICodeLevelModel createMetaModelsFromCompiledClasses(final String aBinPath) {
         ICodeLevelModel codeLevelModel = Factory.getInstance().createCodeLevelModel("");
         final ModelStatistics statisticModelListener = new ModelStatistics();
         codeLevelModel.addModelListener(statisticModelListener);
