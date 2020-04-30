@@ -185,8 +185,79 @@ To generate plantuml source code using this template, we use two \texttt{java.la
 
 In the end, we return the declaration string buffer with \texttt{toString()} method in \texttt{padl.visitor.IGenerator.getCode()} method.
 
+\clearpage
+
 \subsubsection{All classes are inherited from \texttt{java.lang.Object}}
 
+An interesting problem occurred on generated plantuml code. All java class are extended from \texttt{java.lang.Object} class. This make the diagram over complicated. Therefore, we need to handle the case of class is \texttt{java.lang.Object} in relationship string buffer.
 
+The \texttt{padl.kernel.IClass} have \texttt{getName()} method (inherited from \texttt{padl.kernel.IFirstClassEntity}). Comparing the class name with "Object" allow us to distinguish between a normal class with \texttt{java.lang.Object} class.
+
+\section{How to run the project and coding convention}
+
+\subsection{Coding convention}
+
+The coding convention can be found here:
+
+\url{https://github.com/huntertran/soen6461-plantuml-generator/wiki/Coding-Conventions}
+
+Since that is a private repository, an exact copy of the document can be found in this public repository:
+
+\url{https://github.com/huntertran/soen6441-riskgame/wiki/Coding-Conventions}
+
+\subsection{How to run the project}
+
+The project must be run from Eclipse IDE.
+
+\begin{itemize}
+    \item Step 1: extract the zip file and import all 3 project into new Eclipse workspace by select the root folder
+    
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/open_project.png}\color{dimgray}
+    \caption{Import all 3 folder into new eclipse workspace}
+\end{figure}
+    
+    \item Step 2: Select \texttt{plantumlgenerator}. Choose Run / Run As / Java Application
+    
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/run_as.png}\color{dimgray}
+    \caption{\texttt{plantumlgenerator} run as Java Application}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/main_app.png}\color{dimgray}
+    \caption{Choose the target App}
+\end{figure}
+
+    \item Step 3: copy and paste the path to the compiled .class files.\\
+    An example to test is "./src/test/java/plantumlgenerator/padl/event/"\\
+    Enter "n" to show the result in a new window (for copy)
+    
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/console.png}\color{dimgray}
+    \caption{enter the target folder contains compiled .class files}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/result.png}\color{dimgray}
+    \caption{Show the result in new window}
+\end{figure}
+
+    \item Step 4: [Optional] View the diagram online at \url{http://www.plantuml.com/plantuml/uml/}
+    
+\end{itemize}
+
+The result diagram for \texttt{./src/test/java/plantumlgenerator/padl/event/} folder can be viewed \href{http://www.plantuml.com/plantuml/uml/ZL9BRi8m4DtFANm1E0DTe0gfLHTTT8Sq90CCiSUHFKHAA-vUegQMcBfIl60nxyFJUzbanQJNu9rILe0pj-Gez3gwGE50AKFkM7fC69nd8HrxSZ7fEGBqs7Hu8dV10TqNkFlxFN6S3lDhFERitYanUlx4WwSxMD0RbDyYzoYdFmPlXmirMfFUIfGUMs-Yq40ogOpRaw0VC-UjXM-MkVKKI7G1KPHrNC2R6Cyab51Z-eVAefIEs93RrHmhjDVOad_Xh9Fp4hhoiQwfXTwr97S1DwWSfHR9y6M87LbUTUs1C_yKOIm-q7UKwei3F2wuNk_dfW3AOXOe2vcxMMI2vZ-lOG-VCW3KgbojzcOH0B0TsXYbCtFVaBJNuBy1}{here}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/diagram.png}\color{dimgray}
+    \caption{The online diagram generator}
+\end{figure}
 
 \end{document}
