@@ -158,9 +158,14 @@ abstract class PlantUmlVisitor {
         StringUtils.addNewLine(buffer);
         StringUtils.addNewLine(buffer);
         StringUtils.addTabs(this.indent, this.buffer);
+
+        if (arg0.isAbstract()) {
+            this.buffer.append("abstract ");
+        }
+
         this.buffer.append("class " + className + " {");
         StringUtils.addNewLine(buffer);
-        
+
         int test = arg0.getNumberOfConstituents();
 
         StringUtils.addNewLine(relationships);
@@ -294,7 +299,7 @@ abstract class PlantUmlVisitor {
     }
 
     public void open(IPackage arg0) {
-        System.out.print("Open ");
+        System.out.print("package Open ");
         System.out.println(arg0);
 
         StringUtils.addNewLine(buffer);
@@ -304,7 +309,7 @@ abstract class PlantUmlVisitor {
     }
 
     public void open(IPackageDefault arg0) {
-        System.out.print("Open ");
+        System.out.print("package default Open ");
         System.out.println(arg0);
 
         StringUtils.addNewLine(buffer);
