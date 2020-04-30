@@ -17,7 +17,7 @@
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=blue,
 }
 
@@ -96,9 +96,9 @@ The PADL library contains an interface called \texttt{padl.kernel.ICodeLevelMode
 
 To populate the meta-models, we use the \texttt{create(final ICodeLevelModelCreator aCodeLevelModelCreator)} method, with combination with the \texttt{padl.creator.classfile.CompleteClassFileCreator} class. The source code for creating meta-model is already provided by professor Yann-Gaël Guéhéneuc. We put it inside a singleton class \texttt{plantumlgenerator.utils.MetaModelCreator}. Since the provided source code is just a code snippet, many libraries are required to make it run.
 
-\subsection{Compile libraries}
+\subsection{Resolve dependencies}
 
-Here is the list of libraries that missing/required
+Here is the list of dependencies that are missing/required
 \begin{itemize}
     \item package \texttt{padl.kernel} for various interfaces and classes of meta-model.
     \item package \texttt{padl.analysis} for \texttt{UnsupportedSourceModelException}
@@ -127,5 +127,13 @@ The dependency in \texttt{pom.xml} file should look like this and repeated with 
       <systemPath>${basedir}/libs/padl.jar</systemPath>
     </dependency>
 \end{minted}
+
+For the two package \texttt{padl.creator.classfile} and \texttt{padl.statement.creator.classfiles}, we must use the source code (not jar files) to prevent exception of type \texttt{java.lang.NoClassDefFoundError} when trying to load a folder of java compiled \texttt{.class} files. This make the project must be develop using Eclipse IDE. In the future, we will make the project IDE independent using Gradle or Maven.
+
+\subsection{Implement the \texttt{padl.visitor.IGenerator} interface}
+
+We decided to implement the \texttt{padl.visitor.IGenerator} interface for the job, because this interface provide the method \texttt{getCode();}. The \texttt{padl.visitor.IWalker} provide the method \texttt{Object getResult();}, which is not really fit for the task we are trying to do.
+
+
 
 \end{document}
