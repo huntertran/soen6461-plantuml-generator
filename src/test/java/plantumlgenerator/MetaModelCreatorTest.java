@@ -30,17 +30,16 @@ public class MetaModelCreatorTest {
      * Rigorous Test :-)
      */
     @Test
-    public void generatePlantUmlCodeTest()
-    {
+    public void generatePlantUmlCodeTest() {
         // setup
         String pathToClassesFolder = "./src/test/java/plantumlgenerator/padl/event/";
         String expectedResult = this.readFromFile("./src/test/java/plantumlgenerator/GeneratedPlantUmlForPadlEventFolder.puml");
-        
+
         // action
         ICodeLevelModel codeLevelModel = MetaModelCreator.getInstance()
-                .createMetaModelsFromCompiledClasses(pathToClassesFolder);
+                                                         .createMetaModelsFromCompiledClasses(pathToClassesFolder);
         String generatedPlantUml = codeLevelModel.generate(new PlantUmlGenerator());
-        
+
         // assert
         Assert.assertEquals(expectedResult, generatedPlantUml);
     }

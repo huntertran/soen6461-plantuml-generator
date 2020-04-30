@@ -396,9 +396,4 @@ abstract class PlantUmlVisitor {
         System.out.println(arg0);
 
     }
-
-    public Object getResult() {
-        return this.buffer.toString();
-    }
-
 }
