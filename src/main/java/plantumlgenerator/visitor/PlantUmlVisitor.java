@@ -176,7 +176,7 @@ abstract class PlantUmlVisitor {
 
                 IFirstClassEntity entity = (IFirstClassEntity) iterator.next();
 
-                if (entity instanceof Object) {
+                if (String.valueOf(entity.getName()).equals("Object")) {
                     continue;
                 }
 
