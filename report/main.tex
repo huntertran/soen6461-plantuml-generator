@@ -17,13 +17,13 @@
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,
+    filecolor=magenta,      
     urlcolor=blue,
 }
 
 \urlstyle{same}
 \definecolor{darkgray}{rgb}{0.66, 0.66, 0.66}
-	\definecolor{blue(ryb)}{rgb}{0.01, 0.28, 1.0}
+\definecolor{blue(ryb)}{rgb}{0.01, 0.28, 1.0}
 \definecolor{dimgray}{rgb}{0.41, 0.41, 0.41}
 \sectionfont{\color{cyan}} 
 % \subsectionfont{\color{blue}}
@@ -132,7 +132,60 @@ For the two package \texttt{padl.creator.classfile} and \texttt{padl.statement.c
 
 \subsection{Implement the \texttt{padl.visitor.IGenerator} interface}
 
-We decided to implement the \texttt{padl.visitor.IGenerator} interface for the job, because this interface provide the method \texttt{getCode();}. The \texttt{padl.visitor.IWalker} provide the method \texttt{Object getResult();}, which is not really fit for the task we are trying to do.
+We decided to implement the \texttt{padl.visitor.IGenerator} interface for the job, because this interface provide the method \texttt{getCode()}. The \texttt{padl.visitor.IWalker} provide the method \texttt{Object getResult()}, which is not really fit for the task we are trying to do.
+
+We created an abstract class \texttt{plantumlgenerator.visitor.PlantUmlVisitor}. The concrete class \texttt{plantumlgenerator.visitor.PlantUmlGenerator} will extend this abstract class and implements \texttt{padl.visitor.IGenerator}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.75]{diagrams/implement.png}\color{dimgray}
+\caption{The class diagrams of implementation of \texttt{padl.visitor.IGenerator}}
+\end{figure}
+
+\subsubsection{Interested \texttt{open()} and \texttt{close()} methods}
+
+Not all \texttt{open()} and \texttt{close()} methods in \texttt{padl.visitor.IGenerator} were used in the implementation. We only modify these couples of \texttt{open()} and \texttt{close()} methods (all the interfaces use as parameter in open() and close() methods are in \texttt{padl.kernel} package):
+
+\begin{itemize}
+    \item open and close for \texttt{IAbstractModel}: \texttt{IAbstractModel} is the root in the hierarchy of PADL meta-model. So we put the generation of beginning of plantuml code in the open() method, and put ending code in the close() method.
+    \item open and close for \texttt{IPackageDefault} and \texttt{IPackage}: these two interfaces have the same implementation of plantuml code generation. The interface \texttt{IPackageDefault} is for "out of source code" packages (i.e. dependencies package). The \texttt{IPackage} is for normal packages that get compiled.
+    \item open and close for \texttt{IGhost}: \texttt{IGhost} is for classes that have source code in the dependencies libraries (i.e. \texttt{java.io.Serializable})
+    \item open and close for \texttt{IClass}: \texttt{IClass} is for classes that have source code compiled into .class file.
+    \item open and close for \texttt{IInterface}: \texttt{IInterface} is for interfaces that have source code compiled into .class file.
+\end{itemize}
+
+\subsubsection{Plantuml code structure and creation}
+
+A typical plantuml source code is follow:
+
+\begin{minted}[frame=lines,framesep=2mm]{text}
+@startuml diagram_name
+
+' Packages, classes and interfaces declaration
+
+package packageName {
+    class className {
+    }
+    abstract abstractClassName {
+    }
+    interface interfaceName{
+    }
+}
+
+' Classes and interface relationship
+
+className ..|> interfaceName
+className --|> abstractClassName
+
+@enduml
+
+\end{minted}
+
+To generate plantuml source code using this template, we use two \texttt{java.lang.StringBuffer}. One for the packages, classes and interface declaration. The other one is for classes and interfaces relationship. The relationship string buffer is only append text in \texttt{open()} methods. Finally, at the \texttt{close(IAbstractModel arg0)} method, we append the relationship string buffer to the declaration string buffer. This kind of implementation allow us to have plexible algorithm to generate code, decouple the responsibilities of each \texttt{StringBuffer} object.
+
+In the end, we return the declaration string buffer with \texttt{toString()} method in \texttt{padl.visitor.IGenerator.getCode()} method.
+
+\subsubsection{All classes are inherited from \texttt{java.lang.Object}}
 
 
 
